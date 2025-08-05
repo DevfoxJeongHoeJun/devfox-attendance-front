@@ -7,7 +7,6 @@ class AttendanceRecordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String formattedDate = DateFormat('yyyy/MM/dd').format(DateTime.now());
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
