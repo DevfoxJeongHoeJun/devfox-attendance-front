@@ -8,6 +8,23 @@ class AttendanceRecordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final String formattedDate = DateFormat('yyyy/MM/dd').format(DateTime.now());
     return Scaffold(
+
+
+
+      hjghjghjghjghj
+
+
+
+
+
+
+
+
+
+
+
+
+
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
