@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'infoList.dart';
-import 'attendance_record_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,24 +13,32 @@ class LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   bool isChecked = false;
 
-  void _login() {
-    final email = emailController.text;
-    final password = passwordController.text;
-    final masterPwd='1234';
-    final master='marster@devfox.jp';
-    if (email == master && password == masterPwd) {
+  void loginUser() {
+    Navigator.pushReplacementNamed(
+      context,
+      '/attend/record',
+    );
+  }
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Infolist()),
-      );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const AttendanceRecordScreen()),
-      );
-    }
+  void loginAdmin() {
+    Navigator.pushReplacementNamed(
+      context,
+      '/admin/home',
+    );
+  }
 
+  void loginAppAdmin() {
+    Navigator.pushReplacementNamed(
+      context,
+      '/app-admin/home',
+    );
+  }
+
+  void goSignUp() {
+    Navigator.pushReplacementNamed(
+      context,
+      '/user/create',
+    );
   }
 
   @override
@@ -135,7 +141,7 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: _login,
+              onPressed: loginUser,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 60),
                 shape: RoundedRectangleBorder(
@@ -146,7 +152,70 @@ class LoginScreenState extends State<LoginScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                'ログイン',
+                '一般社員ログイン',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: loginAdmin,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 60),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text(
+                '会社管理者ログイン',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: loginAppAdmin,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 60),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text(
+                'APP管理者ログイン',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: goSignUp,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 60),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text(
+                'ユーザー登録（リンクで移動）',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

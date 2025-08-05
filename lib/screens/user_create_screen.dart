@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class UserCreateScreen extends StatelessWidget {
+  const UserCreateScreen({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '社員登録',
-      home: Scaffold(
+    return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar( //タイトル
             centerTitle: true,
@@ -59,7 +53,6 @@ class MyApp extends StatelessWidget {
                 ].toList(),
               ),
             )),
-          ),
           //ボディ end--------------------------------
     );
   }
