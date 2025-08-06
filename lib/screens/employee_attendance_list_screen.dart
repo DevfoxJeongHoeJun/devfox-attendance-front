@@ -109,7 +109,7 @@ class _DateRangeInputState extends State<DateRangeInput> {
             child: AbsorbPointer(
               child: TextField(
                 decoration: const InputDecoration(
-                  hintText: '開始日',
+                  hintText: '2025/07/30',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 4,
@@ -134,7 +134,7 @@ class _DateRangeInputState extends State<DateRangeInput> {
             child: AbsorbPointer(
               child: TextField(
                 decoration: const InputDecoration(
-                  hintText: '終了日',
+                  hintText: '2025/07/30',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 4,
