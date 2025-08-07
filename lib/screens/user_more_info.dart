@@ -21,7 +21,7 @@ class UserAttendanceInfoScreenState extends State<UserAttendanceInfo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'ユーザーの出退勤詳細情報',
+              'ユーザー出退勤詳細情報',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
