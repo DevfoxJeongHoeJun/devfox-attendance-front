@@ -283,32 +283,39 @@ class EmployeeList extends StatelessWidget {
 
     return Column(
       children: employees.map((employee) {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 8),
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black54),
-            borderRadius: BorderRadius.circular(4),
+        return InkWell(
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black54),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      employee['name']!,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(employee['status1']!),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [Text(employee['home']!), Text(employee['status2']!)],
+                ),
+              ],
+            ),
           ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    employee['name']!,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(employee['status1']!),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(employee['home']!), Text(employee['status2']!)],
-              ),
-            ],
-          ),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              '/attend/details',
+            );
+          },
         );
       }).toList(),
     );

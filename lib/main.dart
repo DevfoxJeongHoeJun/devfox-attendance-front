@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/admin/userinfo': (context) => const UserAttendanceInfo(),
         '/attend/record': (context) => const AttendanceRecordScreen(),
         '/attend/list': (context) => const EmployeeAttendanceListScreen(),
+        '/attend/details': (context) => const UserAttendanceInfo(),
         '/app-admin/home': (context) => const CompanyAppAdminHomeScreenAdminHomeScreen(),
         '/app-admin/company/create': (context) => const CompanyCreateScreen(),
       },
