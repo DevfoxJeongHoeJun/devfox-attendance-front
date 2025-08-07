@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class UserAttendanceInfo extends StatefulWidget {
   const UserAttendanceInfo({Key? key}) : super(key: key);
 
