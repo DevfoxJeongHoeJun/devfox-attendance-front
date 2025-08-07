@@ -203,7 +203,7 @@ class NameSearchInput extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 18),
+        const SizedBox(width: 8),
 
         SizedBox(
           height: 48,
