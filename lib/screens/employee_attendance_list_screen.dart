@@ -193,7 +193,7 @@ class NameSearchInput extends StatelessWidget {
           child: TextField(
             style: const TextStyle(fontSize: 14),
             decoration: const InputDecoration(
-              hintText: 'ユーザー氏名で検索',
+              hintText: '社員氏名で検索',
               contentPadding: EdgeInsets.symmetric(
                 vertical: 12,
                 horizontal: 12,
@@ -238,84 +238,97 @@ class EmployeeList extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, String>> employees = [
       {
+        'mark': 'X',
         'name': 'キムさん',
         'home': '在宅',
-        'status1': '出勤　雑色　07/30 09:28',
-        'status2': '退勤　雑色　07/30 18:35',
+        'status1_type': '出勤',
+        'status1_loc': '雑色',
+        'status1_time': '07/30 09:28',
+        'status2_type': '退勤',
+        'status2_loc': '雑色',
+        'status2_time': '07/30 18:35',
       },
       {
+        'mark': 'X',
         'name': 'ソンさん',
         'home': '在宅',
-        'status1': '出勤　雑色　07/30 09:30',
-        'status2': '退勤　雑色　07/30 18:33',
+        'status1_type': '出勤',
+        'status1_loc': '雑色',
+        'status1_time': '07/30 09:30',
+        'status2_type': '退勤',
+        'status2_loc': '雑色',
+        'status2_time': '07/30 18:33',
       },
       {
+        'mark': 'X',
         'name': 'チョイさん',
         'home': 'ー',
-        'status1': '出勤     ー　          --:--        ',
-        'status2': '退勤     ー　          --:--        ',
-      },
-      {
-        'name': 'パクさん',
-        'home': '在宅',
-        'status1': '出勤　雑色　07/30 09:22',
-        'status2': '退勤　雑色　07/30 18:35',
-      },
-      {
-        'name': 'ジョンさん',
-        'home': '出社',
-        'status1': '出勤　川崎　07/30 09:10',
-        'status2': '退勤　川崎　07/30 18:34',
-      },
-      {
-        'name': 'イさん',
-        'home': 'ー',
-        'status1': '出勤     ー　          --:--        ',
-        'status2': '退勤     ー　          --:--        ',
-      },
-      {
-        'name': 'ボさん',
-        'home': '在宅',
-        'status1': '出勤　川崎　07/30 09:30',
-        'status2': '退勤     ー　          --:--        ',
+        'status1_type': '出勤',
+        'status1_loc': 'ー',
+        'status1_time': '--:--',
+        'status2_type': '退勤',
+        'status2_loc': 'ー',
+        'status2_time': '--:--',
       },
     ];
 
     return Column(
       children: employees.map((employee) {
-        return InkWell(
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black54),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      employee['name']!,
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black26),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                    child: Text(
+                      employee['mark'] ?? '',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text(employee['status1']!),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text(employee['home']!), Text(employee['status2']!)],
-                ),
-              ],
-            ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      employee['name'] ?? '',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Text(employee['status1_type'] ?? ''),
+                  ),
+                  Expanded(flex: 1, child: Text(employee['status1_loc'] ?? '')),
+                  Expanded(
+                    flex: 2,
+                    child: Text(employee['status1_time'] ?? ''),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+
+              Row(
+                children: [
+                  const SizedBox(width: 20),
+                  const Expanded(flex: 2, child: SizedBox()),
+                  Expanded(
+                    flex: 1,
+                    child: Text(employee['status2_type'] ?? ''),
+                  ),
+                  Expanded(flex: 1, child: Text(employee['status2_loc'] ?? '')),
+                  Expanded(
+                    flex: 2,
+                    child: Text(employee['status2_time'] ?? ''),
+                  ),
+                ],
+              ),
+            ],
           ),
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              '/attend/details',
-            );
-          },
         );
       }).toList(),
     );
