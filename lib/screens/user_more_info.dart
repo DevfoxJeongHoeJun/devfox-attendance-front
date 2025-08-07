@@ -405,7 +405,7 @@ class UserAttendanceInfoScreenState extends State<UserAttendanceInfo> {
                           child: const Center(
                             child: Text(
                               '27',
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
                             ),
                           ),
                         ),
@@ -521,7 +521,7 @@ class UserAttendanceInfoScreenState extends State<UserAttendanceInfo> {
                     padding: const EdgeInsets.only(bottom: 4),
                     child: const Center(
                       child: Text(
-                        '・出勤 21(総：168時間)',
+                        '・出勤 20(総：168時間)',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -537,7 +537,7 @@ class UserAttendanceInfoScreenState extends State<UserAttendanceInfo> {
                     child: const Center(
                       child: Text(
                         '・欠勤 1',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
                       ),
                     ),
                   ),
