@@ -152,7 +152,7 @@ class LoginScreenState extends State<LoginScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                '一般社員ログイン',
+                '一般ユーザーログイン',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -173,7 +173,7 @@ class LoginScreenState extends State<LoginScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                '会社管理者ログイン',
+                'グループ管理者ログイン',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -195,27 +195,6 @@ class LoginScreenState extends State<LoginScreen> {
               ),
               child: const Text(
                 'APP管理者ログイン',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: goSignUp,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 60),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text(
-                'ユーザー登録（リンクで移動）',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

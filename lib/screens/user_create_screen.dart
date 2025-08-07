@@ -12,7 +12,7 @@ class UserCreateScreen extends StatelessWidget {
             centerTitle: true,
             title: Container(
               margin: EdgeInsets.only(top: 20),
-              child: Text("社員登録" //画面タイトル
+              child: Text("ユーザー登録" //画面タイトル
                 ,style: TextStyle(
                     fontSize: 30, //font size
                     fontWeight: FontWeight.bold
@@ -27,10 +27,10 @@ class UserCreateScreen extends StatelessWidget {
               padding: const EdgeInsets.all(50.0),
               child: Column( //テキストボックス パート
                 children: [
-                  //会社名start--------------------------------
+                  //グループ名start--------------------------------
                   companyNameText(),
                   textBox(),
-                  //会社名end--------------------------------
+                  //グループ名end--------------------------------
 
                   //メールアドレスstart--------------------------------
                   mailAddressText(),
@@ -65,7 +65,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-//会社名テキスト
+//グループ名テキスト
 class companyNameText extends StatelessWidget {
   const companyNameText({super.key});
 
@@ -77,7 +77,7 @@ class companyNameText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child: Text(
-        "会社名",//テキストボックスタイトル
+        "グループ名",//テキストボックスタイトル
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,

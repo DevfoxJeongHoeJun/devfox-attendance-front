@@ -37,7 +37,7 @@ class PageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        '社員勤怠一覧',
+        'ユーザー勤怠一覧',
         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
       ),
     );
@@ -193,7 +193,7 @@ class NameSearchInput extends StatelessWidget {
           child: TextField(
             style: const TextStyle(fontSize: 14),
             decoration: const InputDecoration(
-              hintText: '社員氏名で検索',
+              hintText: 'ユーザー氏名で検索',
               contentPadding: EdgeInsets.symmetric(
                 vertical: 12,
                 horizontal: 12,

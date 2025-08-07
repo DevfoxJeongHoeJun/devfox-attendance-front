@@ -33,7 +33,7 @@ class CompanyAppAdminHomeScreenAdminHomeScreenState extends State<CompanyAppAdmi
           children: [
             // Text配置
             const Text(
-              'APP管理者ホーム',
+              'APP管理者用',
               // style適用
               style: TextStyle(
                 fontSize: 40,
@@ -56,7 +56,7 @@ class CompanyAppAdminHomeScreenAdminHomeScreenState extends State<CompanyAppAdmi
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                '会社登録画面へ',
+                'グループ登録へ',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

@@ -148,26 +148,26 @@ class AttendanceRecordScreen extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  const SizedBox(height:15),
-                  ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 60),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      textStyle: const TextStyle(fontSize: 20),
-                    ),
-                    child: const Text(
-                      '出勤',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  // const SizedBox(height:15),
+                  // ElevatedButton(
+                  //   onPressed: _login,
+                  //   style: ElevatedButton.styleFrom(
+                  //     minimumSize: const Size(double.infinity, 60),
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //     ),
+                  //     backgroundColor: Colors.blue,
+                  //     foregroundColor: Colors.white,
+                  //     textStyle: const TextStyle(fontSize: 20),
+                  //   ),
+                  //   child: const Text(
+                  //     '出勤',
+                  //     style: TextStyle(
+                  //       fontSize: 25,
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height:15),
                   ElevatedButton(
                     onPressed: _login,

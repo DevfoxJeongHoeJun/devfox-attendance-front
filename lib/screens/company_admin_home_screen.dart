@@ -39,7 +39,7 @@ class CompanyAdminHomeScreenState extends State<CompanyAdminHomeScreen> {
           children: [
             // Text配置
             const Text(
-              '会社管理者ホーム',
+              'グループ管理者用',
               // style適用
               style: TextStyle(
                 fontSize: 40,
@@ -62,7 +62,7 @@ class CompanyAdminHomeScreenState extends State<CompanyAdminHomeScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                '会社情報画面へ',
+                'グループ詳細へ',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class CompanyAdminHomeScreenState extends State<CompanyAdminHomeScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                '社員勤怠一覧画面へ',
+                'ユーザー勤怠一覧へ',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
