@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class EmployeeAttendanceListScreen extends StatelessWidget {
   const EmployeeAttendanceListScreen({super.key});
 
@@ -193,7 +192,7 @@ class NameSearchInput extends StatelessWidget {
           child: TextField(
             style: const TextStyle(fontSize: 14),
             decoration: const InputDecoration(
-              hintText: '社員氏名で検索',
+              hintText: 'ユーザー氏名で検索',
               contentPadding: EdgeInsets.symmetric(
                 vertical: 12,
                 horizontal: 12,
@@ -274,60 +273,66 @@ class EmployeeList extends StatelessWidget {
 
     return Column(
       children: employees.map((employee) {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 8),
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black26),
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 20,
-                    child: Text(
-                      employee['mark'] ?? '',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              '/attend/details'
+            );
+          },
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black26),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 20,
+                      child: Text(
+                        employee['mark'] ?? '',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Text(
-                      employee['name'] ?? '',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        employee['name'] ?? '',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(employee['status1_type'] ?? ''),
-                  ),
-                  Expanded(flex: 1, child: Text(employee['status1_loc'] ?? '')),
-                  Expanded(
-                    flex: 2,
-                    child: Text(employee['status1_time'] ?? ''),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-
-              Row(
-                children: [
-                  const SizedBox(width: 20),
-                  const Expanded(flex: 2, child: SizedBox()),
-                  Expanded(
-                    flex: 1,
-                    child: Text(employee['status2_type'] ?? ''),
-                  ),
-                  Expanded(flex: 1, child: Text(employee['status2_loc'] ?? '')),
-                  Expanded(
-                    flex: 2,
-                    child: Text(employee['status2_time'] ?? ''),
-                  ),
-                ],
-              ),
-            ],
+                    Expanded(
+                      flex: 1,
+                      child: Text(employee['status1_type'] ?? ''),
+                    ),
+                    Expanded(flex: 1, child: Text(employee['status1_loc'] ?? '')),
+                    Expanded(
+                      flex: 2,
+                      child: Text(employee['status1_time'] ?? ''),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    const SizedBox(width: 20),
+                    const Expanded(flex: 2, child: SizedBox()),
+                    Expanded(
+                      flex: 1,
+                      child: Text(employee['status2_type'] ?? ''),
+                    ),
+                    Expanded(flex: 1, child: Text(employee['status2_loc'] ?? '')),
+                    Expanded(
+                      flex: 2,
+                      child: Text(employee['status2_time'] ?? ''),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       }).toList(),
