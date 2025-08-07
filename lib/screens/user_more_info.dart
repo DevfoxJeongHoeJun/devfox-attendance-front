@@ -521,7 +521,22 @@ class UserAttendanceInfoScreenState extends State<UserAttendanceInfo> {
                     padding: const EdgeInsets.only(bottom: 4),
                     child: const Center(
                       child: Text(
-                        '出勤 21   欠勤 1',
+                        '・出勤 21(総：168時間)',
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: const Center(
+                      child: Text(
+                        '・欠勤 1',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
