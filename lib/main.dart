@@ -7,6 +7,7 @@ import 'package:attendance_client/screens/user_create_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';  // login.dartをインポート
 import 'screens/attendance_record_screen.dart';
+import 'screens/user_more_info.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/user/create': (context) => const UserCreateScreen(),
         '/admin/home': (context) => const CompanyAdminHomeScreen(),
         '/admin/info': (context) => const CompanyInfoScreen(),
+        '/admin/userinfo': (context) => const UserAttendanceInfo(),
         '/attend/record': (context) => const AttendanceRecordScreen(),
         '/attend/list': (context) => const EmployeeAttendanceListScreen(),
         '/app-admin/home': (context) => const CompanyAppAdminHomeScreenAdminHomeScreen(),
