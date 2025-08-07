@@ -203,7 +203,7 @@ class NameSearchInput extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 18),
+        const SizedBox(width: 8),
 
         SizedBox(
           height: 48,
@@ -252,8 +252,8 @@ class EmployeeList extends StatelessWidget {
       {
         'name': 'チョイさん',
         'home': 'ー',
-        'status1': '出勤　ー　 --:--',
-        'status2': '退勤　ー　 --:--',
+        'status1': '出勤     ー　          --:--        ',
+        'status2': '退勤     ー　          --:--        ',
       },
       {
         'name': 'パクさん',
@@ -270,14 +270,14 @@ class EmployeeList extends StatelessWidget {
       {
         'name': 'イさん',
         'home': 'ー',
-        'status1': '出勤　ー　 --:--',
-        'status2': '退勤　ー　 --:--',
+        'status1': '出勤     ー　          --:--        ',
+        'status2': '退勤     ー　          --:--        ',
       },
       {
         'name': 'ボさん',
         'home': '在宅',
         'status1': '出勤　川崎　07/30 09:30',
-        'status2': '退勤　川崎　     ー　   ',
+        'status2': '退勤     ー　          --:--        ',
       },
     ];
 
