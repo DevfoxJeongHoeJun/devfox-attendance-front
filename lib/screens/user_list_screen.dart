@@ -11,12 +11,11 @@ class UserListScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: const [
-              SizedBox(height: 50),
-              UserListTitle(),
-              SizedBox(height: 50),
-              NameSearchInput(),
+              PageTitle(),
               SizedBox(height: 16),
-              UserList(),
+              NameSearchInput(),
+              SizedBox(height: 8),
+              GroupList(),
             ],
           ),
         ),
@@ -25,12 +24,12 @@ class UserListScreen extends StatelessWidget {
   }
 }
 
-class UserListTitle extends StatelessWidget {
-  const UserListTitle({super.key});
+class PageTitle extends StatelessWidget {
+  const PageTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text(
         'ユーザー一覧画面',
         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -56,19 +55,20 @@ class NameSearchInput extends StatelessWidget {
                 horizontal: 12,
               ),
               border: OutlineInputBorder(),
+              isDense: false,
             ),
           ),
         ),
         const SizedBox(width: 8),
+
         SizedBox(
           height: 48,
           child: ElevatedButton(
-            onPressed: () {
-              // 検索処理をここに追加
-            },
+            onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
+              minimumSize: const Size(48, 48),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
@@ -87,42 +87,44 @@ class NameSearchInput extends StatelessWidget {
   }
 }
 
-class UserList extends StatelessWidget {
-  const UserList({super.key});
-
-  void goToUserDetail(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/app-admin/user-detail-info');
-  }
+class GroupList extends StatelessWidget {
+  const GroupList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> userList = [
-      {'name': 'キムさん(DEVFOX)'},
-      {'name': 'ソンさん(DEVFOX)'},
-      {'name': 'チョイさん(DEVFOX)'},
-      {'name': 'イさん(DEVFOX)'},
-      {'name': 'ハンさん(DEVFOX)'},
-      {'name': 'シュン(DEVFOX)'},
+    final List<Map<String, String>> groups = [
+      {'name': 'キムさん（DEVFOX）', 'detail': '≫'},
+      {'name': 'イさん（DEVFOX）', 'detail': '≫'},
+      {'name': 'パクさん（DEVFOX）', 'detail': '≫'},
+      {'name': 'チョイさん（DEVFOX）', 'detail': '≫'},
+      {'name': 'ハンさん（DEVFOX）', 'detail': '≫'},
+      {'name': 'ジュンさん（DEVFOX）', 'detail': '≫'},
+      {'name': 'ユさん（Yahoo）', 'detail': '≫'},
     ];
 
     return Column(
-      children: userList.map((user) {
+      children: groups.map((group) {
         return GestureDetector(
-            onTap: () => goToUserDetail(context),
+          onTap: () {
+            Navigator.of(context).pushNamed('/app-admin/user-detail-info');
+          },
           child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black26),
-              borderRadius: BorderRadius.circular(4),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.black26, width: 0.5),
+              ),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Text(
-                    user['name'] ?? '',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                Text(
+                  group['name'] ?? '',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  group['detail'] ?? '',
+                  style: const TextStyle(fontSize: 14, color: Colors.black87),
                 ),
               ],
             ),
