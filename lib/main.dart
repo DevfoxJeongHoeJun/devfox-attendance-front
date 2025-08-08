@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';  // login.dartをインポート
 import 'screens/attendance_record_screen.dart';
 import 'screens/user_more_info.dart';
-import 'screens/userList.dart';
-import 'screens/user_detail_info.dart';
+import 'screens/user_list_screen.dart';
+import 'screens/user_detail_info_screen.dart';
+import 'screens/app_admin_home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,13 +32,13 @@ class MyApp extends StatelessWidget {
         '/admin/home': (context) => const CompanyAdminHomeScreen(),
         '/admin/info': (context) => const CompanyInfoScreen(),
         '/admin/userinfo': (context) => const UserAttendanceInfo(),
-        '/admin/userList': (context) => const UserListScreen(),
-        '/admin/userDetaileInfo': (context) => const UserDetailInfo(),
+        '/app-admin/user-list': (context) => const UserListScreen(),
+        '/app-admin/user-detail-info': (context) => const UserDetailInfoScreen(),
+        '/app-admin/home': (context) => const AppAdminHomeScreen(),
         '/attend/record': (context) => const AttendanceRecordScreen(),
         '/attend/list': (context) => const EmployeeAttendanceListScreen(),
         '/attend/details': (context) => const UserAttendanceInfo(),
-        '/app-admin/home': (context) => const CompanyAppAdminHomeScreenAdminHomeScreen(),
-        '/app-admin/company/create': (context) => const CompanyCreateScreen(),
+
       },
     );
   }

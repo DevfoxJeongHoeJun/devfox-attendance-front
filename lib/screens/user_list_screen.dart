@@ -91,7 +91,7 @@ class UserList extends StatelessWidget {
   const UserList({super.key});
 
   void goToUserDetail(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/admin/userDetaileInfo');
+    Navigator.pushReplacementNamed(context, '/app-admin/user-detail-info');
   }
 
   @override
