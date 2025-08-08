@@ -28,7 +28,7 @@ class UserCreateScreen extends StatelessWidget {
               child: Column( //テキストボックス パート
                 children: [
                   //グループ名start--------------------------------
-                  companyNameText(),
+                  userNameText(),
                   textBox(),
                   //グループ名end--------------------------------
 
@@ -43,7 +43,7 @@ class UserCreateScreen extends StatelessWidget {
                   //パスワードend--------------------------------
 
                   //パスワード確認start--------------------------------
-                  passwordReText(),
+                  passwordReconfirmText(),
                   passwordTextBox(),
                   //パスワード確認end--------------------------------
 
@@ -66,8 +66,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 //グループ名テキスト
-class companyNameText extends StatelessWidget {
-  const companyNameText({super.key});
+class userNameText extends StatelessWidget {
+  const userNameText({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class companyNameText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child: Text(
-        "グループ名",//テキストボックスタイトル
+        "ユーザー名",//username
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class mailAddressText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child:   Text(
-        "メールアドレス",//Company Location
+        "メールアドレス",//mail address
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -119,7 +119,7 @@ class passwordText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child:   Text(
-        "パスワード",//Company Location
+        "パスワード",//password
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -129,9 +129,9 @@ class passwordText extends StatelessWidget {
   }
 }
 
-//パスワード確認テキスト
-class passwordReText extends StatelessWidget {
-  const passwordReText({super.key});
+//パスワード再確認テキスト
+class passwordReconfirmText extends StatelessWidget {
+  const passwordReconfirmText({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -140,7 +140,7 @@ class passwordReText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child:   Text(
-        "パスワード確認",//Company Location
+        "パスワード再確認",//password confirm
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -159,7 +159,7 @@ class textBox extends StatelessWidget {
     return Container(
       width: 800,
       height: 45,
-      child: TextField( //CompanyName
+      child: TextField(
         decoration: InputDecoration(
             hintText: "テキストボックス",
             filled: true,
@@ -187,7 +187,7 @@ class passwordTextBox extends StatelessWidget {
     return Container(
       width: 800,
       height: 45,
-      child: TextField( //CompanyName
+      child: TextField(
         obscureText: true,
         decoration: InputDecoration(
             hintText: "テキストボックス",
