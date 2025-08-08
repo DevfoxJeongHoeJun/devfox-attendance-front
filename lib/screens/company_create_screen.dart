@@ -28,24 +28,59 @@ class CompanyCreateScreen extends StatelessWidget {
             child: Column( //テキストボックス パート
               children: [
                 //グループ名start--------------------------------
-                companyNameText(),
+                groupNameText(),
                 textBox(),
                 //グループ名end--------------------------------
 
                 //グループ住所start--------------------------------
-                companyLocText(),
+                groupLocationText(),
                 textBox(),
                 //グループ住所end--------------------------------
 
-                //グループ管理コードstart--------------------------------
-                companyCodeText(),
-                textBox(),
-                //グループ管理コードend--------------------------------
+                // //グループ管理コードstart--------------------------------
+                // companyCodeText(),
+                // textBox(),
+                // //グループ管理コードend--------------------------------
 
                 //ドメイン--------------------------
                 domainText(),
                 textBox(),
                 //グループ管理コードend--------------------------------
+
+                //Divider start-----------------------------------
+                Container(
+                  height: 50,
+                  decoration:BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.black,
+                        width: 3
+                      )
+                    )
+                  ),
+                ),
+                //Divider end----------------------------------
+
+                //user infomation(ユーザー情報)
+                //ユーザー名start--------------------------------
+                groupMasterNameText(),
+                textBox(),
+                //ユーザー名end--------------------------------
+
+                //メールアドレスstart--------------------------------
+                mailAddressText(),
+                textBox(),
+                //メールアドレスend--------------------------------
+
+                //パスワードstart--------------------------------
+                passwordText(),
+                passwordTextBox(),
+                //パスワードend--------------------------------
+
+                //パスワード確認start--------------------------------
+                passwordReconfirmText(),
+                passwordTextBox(),
+                //パスワード確認end--------------------------------
 
                 //登録ボタンstart--------------------------------
                 registButton(),
@@ -69,18 +104,18 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 //グループ名テキスト
-class companyNameText extends StatelessWidget {
-  const companyNameText({super.key});
+class groupNameText extends StatelessWidget {
+  const groupNameText({super.key});
 
   @override
   Widget build(BuildContext context) {
     return  Container(
         width: 800,
-        height: 35,
+        height: 30,
         alignment: Alignment.centerLeft,
         margin: EdgeInsets.only(top: 20,bottom: 5),
         child: Text(
-        "グループ名",//テキストボックスタイトル
+        "グループ名",//group name
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -91,17 +126,17 @@ class companyNameText extends StatelessWidget {
 }
 
 //グループ住所テキスト
-class companyLocText extends StatelessWidget {
-  const companyLocText({super.key});
+class groupLocationText extends StatelessWidget {
+  const groupLocationText({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 800,
-      height: 35,
+      height: 30,
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child:   Text(
-        "グループ住所",//Company Location
+        "グループ住所",//group Location
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -111,26 +146,26 @@ class companyLocText extends StatelessWidget {
   }
 }
 
-//グループ管理コードテキスト
-class companyCodeText extends StatelessWidget {
-  const companyCodeText({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 800,
-      height: 35,
-      alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(top: 20,bottom: 5),
-      child:   Text(
-        "グループ管理コード",//Company Location
-        style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-        ),
-      ),
-    );
-  }
-}
+// //グループ管理コードテキスト
+// class companyCodeText extends StatelessWidget {
+//   const companyCodeText({super.key});
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 800,
+//       height: 35,
+//       alignment: Alignment.centerLeft,
+//       margin: EdgeInsets.only(top: 20,bottom: 5),
+//       child:   Text(
+//         "グループ管理コード",//Company Location
+//         style: TextStyle(
+//             fontSize: 20,
+//             fontWeight: FontWeight.bold
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 //ドメインテキスト
 class domainText extends StatelessWidget {
@@ -139,11 +174,93 @@ class domainText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 800,
-      height: 35,
+      height: 30,
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child:   Text(
-        "ドメイン",//Company Location
+        "ドメイン",//group domain
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    );
+  }
+}
+
+class groupMasterNameText extends StatelessWidget {
+  const groupMasterNameText({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 30,
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.only(top: 20,bottom: 5),
+      child:   Text(
+        "グループ管理者名",//group master name
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    );
+  }
+}
+//メールアドレステキスト
+class mailAddressText extends StatelessWidget {
+  const mailAddressText({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 30,
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.only(top: 20,bottom: 5),
+      child:   Text(
+        "メールアドレス",//mail address
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    );
+  }
+}
+
+//パスワードテキスト
+class passwordText extends StatelessWidget {
+  const passwordText({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 30,
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.only(top: 20,bottom: 5),
+      child:   Text(
+        "パスワード",//password
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    );
+  }
+}
+
+//パスワード確認テキスト
+class passwordReconfirmText extends StatelessWidget {
+  const passwordReconfirmText({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 30,
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.only(top: 20,bottom: 5),
+      child:   Text(
+        "パスワード再確認",//password reconfirm
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -161,7 +278,7 @@ class textBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
           width: 800,
-          height: 35,
+          height: 30,
           child: TextField( //CompanyName
           decoration: InputDecoration(
           hintText: "テキストボックス",
@@ -181,6 +298,34 @@ class textBox extends StatelessWidget {
   }
 }
 
+//パスワードテキストボックス
+class passwordTextBox extends StatelessWidget {
+  const passwordTextBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 30,
+      child: TextField( //CompanyName
+        obscureText: true,
+        decoration: InputDecoration(
+            hintText: "テキストボックス",
+            filled: true,
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.black)
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.black)
+            )
+        ),
+      ),
+    );
+  }
+}
 
 //登録ボタン
 class registButton extends StatelessWidget {
@@ -190,7 +335,7 @@ class registButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 800,
-      height: 35,
+      height: 30,
       margin: EdgeInsets.only(top: 50,bottom: 5),
       child: ElevatedButton(onPressed: (){
 
