@@ -7,26 +7,16 @@ class UserDetailInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Container(
-          margin: const EdgeInsets.only(top: 20),
-          child: const Text(
-            "ユーザー情報画面",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-
       // 本体部分
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(50.0),
+
           child: Column(
+
+
             children: [
+              const titleLable(),
               // ユーザー名
               const UserNameLabel(),
               const InputTextBox(),
@@ -48,6 +38,22 @@ class UserDetailInfoScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+
+class titleLable extends StatelessWidget {
+  const titleLable({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      "ユーザー情報画面",
+      style: TextStyle(
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
