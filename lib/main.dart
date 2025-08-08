@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';  // login.dartをインポート
 import 'screens/attendance_record_screen.dart';
 import 'screens/user_more_info.dart';
+import 'screens/userList.dart';
+import 'screens/user_detail_info.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
         '/admin/home': (context) => const CompanyAdminHomeScreen(),
         '/admin/info': (context) => const CompanyInfoScreen(),
         '/admin/userinfo': (context) => const UserAttendanceInfo(),
+        '/admin/userList': (context) => const UserListScreen(),
+        '/admin/userDetaileInfo': (context) => const UserDetailInfo(),
         '/attend/record': (context) => const AttendanceRecordScreen(),
         '/attend/list': (context) => const EmployeeAttendanceListScreen(),
         '/attend/details': (context) => const UserAttendanceInfo(),
