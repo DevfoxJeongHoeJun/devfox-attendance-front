@@ -12,6 +12,7 @@ import 'screens/user_more_info_screen.dart';
 import 'screens/user_list_screen.dart';
 import 'screens/user_detail_info_screen.dart';
 import 'screens/app_admin_home_screen.dart';
+import 'screens/group_detail_info_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         '/app-admin/user-detail-info': (context) => const UserDetailInfoScreen(),
         '/app-admin/home': (context) => const AppAdminHomeScreen(),
         '/app-admin/group-list': (context) => const GroupListScreen(),
+        '/app-admin/group-detail-info': (context) => const GroupDetailInfoScreen(),
         '/attend/record': (context) => const AttendanceRecordScreen(),
         '/attend/list': (context) => const EmployeeAttendanceListScreen(),
         '/attend/details': (context) => const UserAttendanceInfoScreen(),
