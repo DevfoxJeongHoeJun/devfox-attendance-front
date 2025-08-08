@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class UserAttendanceInfo extends StatefulWidget {
-  const UserAttendanceInfo({Key? key}) : super(key: key);
+class UserAttendanceInfoScreen extends StatefulWidget {
+  const UserAttendanceInfoScreen({Key? key}) : super(key: key);
 
   @override
   UserAttendanceInfoScreenState createState() => UserAttendanceInfoScreenState();
 }
 
 
-class UserAttendanceInfoScreenState extends State<UserAttendanceInfo> {
+class UserAttendanceInfoScreenState extends State<UserAttendanceInfoScreen> {
   void _login() {
   }
 
