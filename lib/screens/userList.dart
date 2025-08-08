@@ -90,6 +90,10 @@ class NameSearchInput extends StatelessWidget {
 class UserList extends StatelessWidget {
   const UserList({super.key});
 
+  void goToUserDetail(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/admin/userDetaileInfo');
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Map<String, String>> userList = [
@@ -104,9 +108,7 @@ class UserList extends StatelessWidget {
     return Column(
       children: userList.map((user) {
         return GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed('/attend/details');
-          },
+            onTap: () => goToUserDetail(context),
           child: Container(
             margin: const EdgeInsets.only(bottom: 8),
             padding: const EdgeInsets.all(8),
