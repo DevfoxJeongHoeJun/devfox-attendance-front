@@ -12,7 +12,7 @@ class UserCreateScreen extends StatelessWidget {
             centerTitle: true,
             title: Container(
               margin: EdgeInsets.only(top: 20),
-              child: Text("新規登録" //画面タイトル
+              child: Text("ユーザー登録" //画面タイトル
                 ,style: TextStyle(
                     fontSize: 30, //font size
                     fontWeight: FontWeight.bold
@@ -29,97 +29,22 @@ class UserCreateScreen extends StatelessWidget {
                 children: [
                   //グループ名start--------------------------------
                   userNameText(),
-                  Container(
-                    width: 800,
-                    height: 45,
-                    child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText: "氏名を入力してください",
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          )
-                      ),
-                    ),
-                  ),
+                  textBox1(),
                   //グループ名end--------------------------------
 
                   //メールアドレスstart--------------------------------
                   mailAddressText(),
-                  Container(
-                    width: 800,
-                    height: 45,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "メールアドレスを入力してください",
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          )
-                      ),
-                    ),
-                  ),
+                  textBox2(),
                   //メールアドレスend--------------------------------
 
                   //パスワードstart--------------------------------
                   passwordText(),
-                  Container(
-                    width: 800,
-                    height: 45,
-                    child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText: "パスワードを入力してください",
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          )
-                      ),
-                    ),
-                  ),
+                  passwordTextBox1(),
                   //パスワードend--------------------------------
 
                   //パスワード再確認start--------------------------------
                   passwordReconfirmText(),
-                  Container(
-                    width: 800,
-                    height: 45,
-                    child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText: "パスワード再確認を入力してください",
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)
-                          )
-                      ),
-                    ),
-                  ),
+                  passwordTextBox2(),
                   //パスワード確認end--------------------------------
 
                   //登録ボタンstart--------------------------------
@@ -143,6 +68,8 @@ class MyHomePage extends StatefulWidget {
 //グループ名テキスト
 class userNameText extends StatelessWidget {
   const userNameText({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -226,8 +153,8 @@ class passwordReconfirmText extends StatelessWidget {
 }
 
 //一般テキストボックス
-class textBox extends StatelessWidget {
-  const textBox({super.key});
+class textBox1 extends StatelessWidget {
+  const textBox1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +163,35 @@ class textBox extends StatelessWidget {
       height: 45,
       child: TextField(
         decoration: InputDecoration(
-            hintText: "テキストボックス",
+            hintText: "氏名を入力してください",
+            filled: true,
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.black)
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.black)
+            )
+        ),
+      ),
+    );
+  }
+}
+
+//一般テキストボックス
+class textBox2 extends StatelessWidget {
+  const textBox2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 45,
+      child: TextField(
+        decoration: InputDecoration(
+            hintText: "メールアドレスを入力してください",
             filled: true,
             fillColor: Colors.grey[100],
             border: OutlineInputBorder(
@@ -254,8 +209,8 @@ class textBox extends StatelessWidget {
 }
 
 //パスワードテキストボックス
-class passwordTextBox extends StatelessWidget {
-  const passwordTextBox({super.key});
+class passwordTextBox1 extends StatelessWidget {
+  const passwordTextBox1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -265,7 +220,36 @@ class passwordTextBox extends StatelessWidget {
       child: TextField(
         obscureText: true,
         decoration: InputDecoration(
-            hintText: "テキストボックス",
+            hintText: "パスワードを入力してください",
+            filled: true,
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.black)
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.black)
+            )
+        ),
+      ),
+    );
+  }
+}
+
+//パスワードテキストボックス
+class passwordTextBox2 extends StatelessWidget {
+  const passwordTextBox2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 800,
+      height: 45,
+      child: TextField(
+        obscureText: true,
+        decoration: InputDecoration(
+            hintText: "パスワード再確認を入力してください",
             filled: true,
             fillColor: Colors.grey[100],
             border: OutlineInputBorder(
@@ -286,15 +270,23 @@ class passwordTextBox extends StatelessWidget {
 class registButton extends StatelessWidget {
   const registButton({super.key});
 
+  void loginUser(BuildContext context) {
+    Navigator.pushReplacementNamed(
+      context,
+      '/login',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
         width: 800,
         height: 70,
         margin: EdgeInsets.only(top: 50,bottom: 5),
-        child: ElevatedButton(onPressed: (){
-
-        },
+        child: ElevatedButton(
+          onPressed: () {
+            loginUser(context);
+          },
           style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),

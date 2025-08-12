@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class AttendanceRecordScreen extends StatelessWidget {
-  const AttendanceRecordScreen({super.key});
+class AttendanceRecordScreen2 extends StatelessWidget {
+  const AttendanceRecordScreen2({super.key});
 
   void _userMoreInfo(BuildContext context) {
     Navigator.pushReplacementNamed(
@@ -13,7 +13,7 @@ class AttendanceRecordScreen extends StatelessWidget {
   void _login(BuildContext context) {
     Navigator.pushReplacementNamed(
       context,
-      '/attend/record2',
+      '/attend/record',
     );
   }
 
@@ -150,9 +150,39 @@ class AttendanceRecordScreen extends StatelessWidget {
                       );
                     }).toList(),
                   ),
+
                   const SizedBox(height:15),
                   ElevatedButton(
                     onPressed: () => _login(context),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 60),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: Colors.orange,
+                      foregroundColor: Colors.white,
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    child: const Text(
+                      '退勤',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+
+              child: Column(
+                children:[
+                  ElevatedButton(
+                    onPressed: () => _userMoreInfo(context),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 60),
                       shape: RoundedRectangleBorder(
@@ -163,45 +193,14 @@ class AttendanceRecordScreen extends StatelessWidget {
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     child: const Text(
-                      '出勤',
+                      '自分の勤怠詳細へ',
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-
                 ],
-              ),
-
-            ),
-
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-
-              child: Column(
-                  children:[
-                    ElevatedButton(
-                      onPressed: () => _userMoreInfo(context),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 60),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        backgroundColor: Colors.indigo,
-                        foregroundColor: Colors.white,
-                        textStyle: const TextStyle(fontSize: 20),
-                      ),
-                      child: const Text(
-                        '自分の勤怠詳細へ',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
               ),
             ),
           ],

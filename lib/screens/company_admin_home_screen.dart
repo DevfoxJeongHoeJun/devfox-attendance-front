@@ -32,6 +32,7 @@ class CompanyAdminHomeScreenState extends State<CompanyAdminHomeScreen> {
       print('tapped');
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -102,10 +103,10 @@ class CompanyAdminHomeScreenState extends State<CompanyAdminHomeScreen> {
                 fontSize: 40,
                 // 文字を厚く
                 fontWeight: FontWeight.bold,
-
               ),
             ),
             // 空間生成
+
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: goEmployeeAttendanceListScreen,
@@ -126,6 +127,7 @@ class CompanyAdminHomeScreenState extends State<CompanyAdminHomeScreen> {
                 ),
               ),
             ),
+
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: goCompanyInfoScreen,
@@ -146,6 +148,7 @@ class CompanyAdminHomeScreenState extends State<CompanyAdminHomeScreen> {
                 ),
               ),
             ),
+
           ],
         ),
       ),

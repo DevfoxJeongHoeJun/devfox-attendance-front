@@ -8,6 +8,7 @@ import 'package:attendance_client/screens/user_create_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';  // login.dartをインポート
 import 'screens/attendance_record_screen.dart';
+import 'screens/attendance_record_screen2.dart';
 import 'screens/user_more_info_screen.dart';
 import 'screens/user_list_screen.dart';
 import 'screens/user_detail_info_screen.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
 
         //勤怠
         '/attend/record': (context) => const AttendanceRecordScreen(),
+        '/attend/record2': (context) => const AttendanceRecordScreen2(),
         '/attend/list': (context) => const EmployeeAttendanceListScreen(),
         '/attend/details': (context) => const UserAttendanceInfoScreen(),
 
