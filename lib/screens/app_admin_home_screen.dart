@@ -53,7 +53,7 @@ class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                'ユーザー一覧へ',
+                'ユーザー一覧画面へ',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -73,7 +73,7 @@ class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                'グループ一覧へ',
+                'グループ一覧画面へ',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
