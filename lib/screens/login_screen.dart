@@ -34,6 +34,13 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void userCreate() {
+    Navigator.pushReplacementNamed(
+      context,
+      '/user/create',
+    );
+  }
+
   void goSignUp() {
     Navigator.pushReplacementNamed(
       context,
@@ -195,6 +202,27 @@ class LoginScreenState extends State<LoginScreen> {
               ),
               child: const Text(
                 'APP管理者ログイン',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: userCreate,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 60),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text(
+                '新規登録',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

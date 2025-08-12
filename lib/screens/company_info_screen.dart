@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 class CompanyInfoScreen extends StatelessWidget {
   const CompanyInfoScreen({super.key});
+  void _login(){
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +160,34 @@ class CompanyInfoScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(bottom: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height:15),
+                    ElevatedButton(
+                      onPressed: _login,
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 60),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: Colors.indigo,
+                        foregroundColor: Colors.white,
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      child: const Text(
+                        '編集',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ]
+              )
             ),
           ],
         ),

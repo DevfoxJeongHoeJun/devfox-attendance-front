@@ -106,7 +106,7 @@ class GroupList extends StatelessWidget {
       children: groups.map((group) {
         return GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed('/attend/details');
+            Navigator.of(context).pushNamed('/app-admin/group-detail-info');
           },
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
