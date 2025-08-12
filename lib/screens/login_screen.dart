@@ -37,7 +37,7 @@ class LoginScreenState extends State<LoginScreen> {
   void userCreate() {
     Navigator.pushReplacementNamed(
       context,
-      '/user/create',
+      '/admin/create',
     );
   }
 
@@ -91,6 +91,7 @@ class LoginScreenState extends State<LoginScreen> {
             TextField(
               controller: emailController,
               decoration: const InputDecoration(
+                hintText: "メールを入力してください",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
@@ -114,6 +115,7 @@ class LoginScreenState extends State<LoginScreen> {
               obscureText: true,
               controller: passwordController,
               decoration: const InputDecoration(
+                hintText: "パスワードを入力してください",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
@@ -159,7 +161,7 @@ class LoginScreenState extends State<LoginScreen> {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               child: const Text(
-                '一般ユーザーログイン',
+                'ログイン',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -167,47 +169,68 @@ class LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: loginAdmin,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 60),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text(
-                'グループ管理者ログイン',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: loginAppAdmin,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 60),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text(
-                'APP管理者ログイン',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            // const SizedBox(height: 24),
+            // ElevatedButton(
+            //   onPressed: loginUser,
+            //   style: ElevatedButton.styleFrom(
+            //     minimumSize: const Size(double.infinity, 60),
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10),
+            //     ),
+            //     backgroundColor: Colors.blue,
+            //     foregroundColor: Colors.white,
+            //     textStyle: const TextStyle(fontSize: 20),
+            //   ),
+            //   child: const Text(
+            //     '一般ユーザーログイン',
+            //     style: TextStyle(
+            //       fontSize: 30,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+            //
+            // const SizedBox(height: 24),
+            // ElevatedButton(
+            //   onPressed: loginAdmin,
+            //   style: ElevatedButton.styleFrom(
+            //     minimumSize: const Size(double.infinity, 60),
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10),
+            //     ),
+            //     backgroundColor: Colors.blue,
+            //     foregroundColor: Colors.white,
+            //     textStyle: const TextStyle(fontSize: 20),
+            //   ),
+            //   child: const Text(
+            //     'グループ管理者ログイン',
+            //     style: TextStyle(
+            //       fontSize: 30,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+            //
+            // const SizedBox(height: 24),
+            // ElevatedButton(
+            //   onPressed: loginAppAdmin,
+            //   style: ElevatedButton.styleFrom(
+            //     minimumSize: const Size(double.infinity, 60),
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10),
+            //     ),
+            //     backgroundColor: Colors.blue,
+            //     foregroundColor: Colors.white,
+            //     textStyle: const TextStyle(fontSize: 20),
+            //   ),
+            //   child: const Text(
+            //     'APP管理者ログイン',
+            //     style: TextStyle(
+            //       fontSize: 30,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
 
             const SizedBox(height: 24),
             ElevatedButton(
