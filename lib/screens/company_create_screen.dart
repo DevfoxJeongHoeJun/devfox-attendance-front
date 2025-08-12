@@ -12,7 +12,7 @@ class CompanyCreateScreen extends StatelessWidget {
           centerTitle: true,
           title: Container(
             margin: EdgeInsets.only(top: 20),
-            child: Text("グループ登録" //画面タイトル
+            child: Text("グループ新規登録" //画面タイトル
             ,style: TextStyle(
                 fontSize: 30, //font size
                 fontWeight: FontWeight.bold
@@ -29,12 +29,48 @@ class CompanyCreateScreen extends StatelessWidget {
               children: [
                 //グループ名start--------------------------------
                 groupNameText(),
-                textBox(),
+                Container(
+                  width: 800,
+                  height: 30,
+                  child: TextField( //CompanyName
+                    decoration: InputDecoration(
+                        hintText: "グループを入力してください",
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),
+                ),
                 //グループ名end--------------------------------
 
                 //グループ住所start--------------------------------
                 groupLocationText(),
-                textBox(),
+                Container(
+                  width: 800,
+                  height: 30,
+                  child: TextField( //CompanyName
+                    decoration: InputDecoration(
+                        hintText: "住所を入力してください",
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),
+                ),
                 //グループ住所end--------------------------------
 
                 // //グループ管理コードstart--------------------------------
@@ -44,7 +80,25 @@ class CompanyCreateScreen extends StatelessWidget {
 
                 //ドメイン--------------------------
                 domainText(),
-                textBox(),
+                Container(
+                  width: 800,
+                  height: 30,
+                  child: TextField( //CompanyName
+                    decoration: InputDecoration(
+                        hintText: "ドメインを入力してください",
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),
+                ),
                 //グループ管理コードend--------------------------------
 
                 //Divider start-----------------------------------
@@ -61,25 +115,99 @@ class CompanyCreateScreen extends StatelessWidget {
                 ),
                 //Divider end----------------------------------
 
-                //user infomation(ユーザー情報)
+                //Master infomation(管理者情報)
                 //ユーザー名start--------------------------------
                 groupMasterNameText(),
-                textBox(),
+                Container(
+                  width: 800,
+                  height: 30,
+                  child: TextField( //CompanyName
+                    decoration: InputDecoration(
+                        hintText: "管理者氏名を入力してください",
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),
+                ),
                 //ユーザー名end--------------------------------
 
                 //メールアドレスstart--------------------------------
                 mailAddressText(),
-                textBox(),
+                Container(
+                  width: 800,
+                  height: 30,
+                  child: TextField( //CompanyName
+                    decoration: InputDecoration(
+                        hintText: "メールアドレスを入力してください",
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),
+                ),
                 //メールアドレスend--------------------------------
 
                 //パスワードstart--------------------------------
                 passwordText(),
-                passwordTextBox(),
+                Container(
+                  width: 800,
+                  height: 30,
+                  child: TextField( //CompanyName
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: "パスワードを入力してください",
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),
+                ),
                 //パスワードend--------------------------------
 
                 //パスワード確認start--------------------------------
                 passwordReconfirmText(),
-                passwordTextBox(),
+                Container(
+                  width: 800,
+                  height: 30,
+                  child: TextField( //CompanyName
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: "パスワードを入力してください",
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),
+                ),
                 //パスワード確認end--------------------------------
 
                 //登録ボタンstart--------------------------------
@@ -136,7 +264,7 @@ class groupLocationText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child:   Text(
-        "グループ住所",//group Location
+        "住所",//"グループ住所",//group Location
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -198,7 +326,7 @@ class groupMasterNameText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child:   Text(
-        "グループ管理者名",//group master name
+        "管理者氏名",//"グループ管理者名",//group master name
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold

@@ -42,7 +42,7 @@ class UserCreateScreen extends StatelessWidget {
                   passwordTextBox1(),
                   //パスワードend--------------------------------
 
-                  //パスワード確認start--------------------------------
+                  //パスワード再確認start--------------------------------
                   passwordReconfirmText(),
                   passwordTextBox2(),
                   //パスワード確認end--------------------------------

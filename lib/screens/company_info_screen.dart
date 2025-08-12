@@ -20,7 +20,7 @@ class CompanyInfoScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 34),
               child: const  Center(
                 child: Text(
-                  'グループ詳細',
+                  'グループ詳細画面',
                   style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -45,7 +45,7 @@ class CompanyInfoScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(bottom: 4),
               child: const Text(
-                '住所',
+                'グループ住所',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -86,38 +86,38 @@ class CompanyInfoScreen extends StatelessWidget {
               ),
             ),
 
+            // Container(
+            //   padding: const EdgeInsets.only(bottom: 4),
+            //   child: const Text(
+            //     'グループコード',
+            //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+
+            // Container(
+            //   padding: const EdgeInsets.only(bottom: 14),
+            //   child: TextFormField(
+            //     initialValue: 'devfox',
+            //     decoration: InputDecoration(
+            //       hintText: 'グループコード初期値です。',
+            //       filled: true,
+            //       fillColor: Colors.grey[100],
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(12),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderSide: BorderSide(color: Colors.black54, width: 2),
+            //         borderRadius: BorderRadius.circular(12),
+            //       ),
+            //       contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            //     ),
+            //   ),
+            // ),
+
             Container(
               padding: const EdgeInsets.only(bottom: 4),
               child: const Text(
-                'グループコード',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            Container(
-              padding: const EdgeInsets.only(bottom: 14),
-              child: TextFormField(
-                initialValue: 'devfox',
-                decoration: InputDecoration(
-                  hintText: 'グループコード初期値です。',
-                  filled: true,
-                  fillColor: Colors.grey[100],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black54, width: 2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                ),
-              ),
-            ),
-
-            Container(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: const Text(
-                '招待リンク送信',
+                '招待リンク',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -129,7 +129,7 @@ class CompanyInfoScreen extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'メールアドレスを入力',
+                        hintText: 'メールアドレスで招待',
                         filled: true,
                         fillColor: Colors.grey[100],
                         contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
