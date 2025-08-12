@@ -12,7 +12,7 @@ class UserCreateScreen extends StatelessWidget {
             centerTitle: true,
             title: Container(
               margin: EdgeInsets.only(top: 20),
-              child: Text("ユーザー登録" //画面タイトル
+              child: Text("新規登録" //画面タイトル
                 ,style: TextStyle(
                     fontSize: 30, //font size
                     fontWeight: FontWeight.bold
@@ -29,22 +29,97 @@ class UserCreateScreen extends StatelessWidget {
                 children: [
                   //グループ名start--------------------------------
                   userNameText(),
-                  textBox(),
+                  Container(
+                    width: 800,
+                    height: 45,
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: "氏名を入力してください",
+                          filled: true,
+                          fillColor: Colors.grey[100],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          )
+                      ),
+                    ),
+                  ),
                   //グループ名end--------------------------------
 
                   //メールアドレスstart--------------------------------
                   mailAddressText(),
-                  textBox(),
+                  Container(
+                    width: 800,
+                    height: 45,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintText: "メールアドレスを入力してください",
+                          filled: true,
+                          fillColor: Colors.grey[100],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          )
+                      ),
+                    ),
+                  ),
                   //メールアドレスend--------------------------------
 
                   //パスワードstart--------------------------------
                   passwordText(),
-                  passwordTextBox(),
+                  Container(
+                    width: 800,
+                    height: 45,
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: "パスワードを入力してください",
+                          filled: true,
+                          fillColor: Colors.grey[100],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          )
+                      ),
+                    ),
+                  ),
                   //パスワードend--------------------------------
 
-                  //パスワード確認start--------------------------------
+                  //パスワード再確認start--------------------------------
                   passwordReconfirmText(),
-                  passwordTextBox(),
+                  Container(
+                    width: 800,
+                    height: 45,
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: "パスワード再確認を入力してください",
+                          filled: true,
+                          fillColor: Colors.grey[100],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)
+                          )
+                      ),
+                    ),
+                  ),
                   //パスワード確認end--------------------------------
 
                   //登録ボタンstart--------------------------------
@@ -77,7 +152,7 @@ class userNameText extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(top: 20,bottom: 5),
       child: Text(
-        "ユーザー名",//username
+        "氏名",//username
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,

@@ -49,7 +49,7 @@ class NameSearchInput extends StatelessWidget {
           child: TextField(
             style: const TextStyle(fontSize: 14),
             decoration: const InputDecoration(
-              hintText: 'ユーザー氏名で検索',
+              hintText: 'グループ名で検索',
               contentPadding: EdgeInsets.symmetric(
                 vertical: 12,
                 horizontal: 12,

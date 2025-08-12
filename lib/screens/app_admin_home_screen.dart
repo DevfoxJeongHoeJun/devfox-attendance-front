@@ -34,7 +34,8 @@ class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'アップリ管理者用',
+              'アプリ管理者用　\nホーム',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,

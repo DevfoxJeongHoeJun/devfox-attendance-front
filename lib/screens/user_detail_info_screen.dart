@@ -202,7 +202,8 @@ class DeleteButton extends StatelessWidget {
           // 削除ボタンの処理
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.redAccent,
+          // backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.blueAccent,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
