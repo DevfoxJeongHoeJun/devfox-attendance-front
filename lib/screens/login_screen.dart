@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,7 +15,69 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final storage = new FlutterSecureStorage();
+
   bool isChecked = false;
+
+  String? sessionCookie;
+
+  Future<void> loginUserHttp() async {
+    // 「https://velog.io/@ramyuning/%EB%B0%B1%EC%97%94%EB%93%9C%EC%99%80-http-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0」、
+    // 「https://qiita.com/k-keita/items/5b748e081cf96c5ea38f」←は私が参考したリンクです。
+    // FlutterでHTTPのRequestの方法です。
+    final url = Uri.parse("http://localhost:8080/api/user/login");
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        "email": emailController.text,
+        "password": passwordController.text
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // 「https://velog.io/@ramyuning/%EB%B0%B1%EC%97%94%EB%93%9C%EC%99%80-http-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0」、
+      // 「https://qiita.com/k-keita/items/5b748e081cf96c5ea38f」←は私が参考したリンクです。
+      // FlutterでHTTPのRequestの方法です。
+
+      final userData = json.decode(response.body);
+      var message = userData['message'];
+
+      print("レスポンス: ${response.body}");
+      print("status: ${response.statusCode}");
+      print("message: ${message}");
+
+      await storage.write(key: "userId", value: userData['body']['id'].toString());
+      await storage.write(key: "username", value: userData['body']['name']);
+      await storage.write(key: "role", value: userData['body']['accessLevelCode']);
+      await storage.write(key: "groupCode", value: userData['body']['groupCode']);
+
+      // await storage.write(key: "userId", value: userData['id'].toString());
+      // await storage.write(key: "username", value: userData['name']);
+      // await storage.write(key: "role", value: userData['accessLevelCode']);
+      // await storage.write(key: "groupCode", value: userData['groupCode']);
+
+      final userId = await storage.read(key: "userId");
+      final username = await storage.read(key: "username");
+      final role = await storage.read(key: "role");
+      final groupCode = await storage.read(key: "groupCode");
+
+      print("userId : $userId");
+      print("username : $username");
+      print("role : $role");
+      print("groupCode : $groupCode");
+
+      if(role == "ROLE_USER" || role == "ROLE_MANAGER"){
+        loginUser();
+      } else if (role == "ROLE_ADMIN") {
+        loginAdmin();
+      } else if (role == "ROLE_SUPER") {
+        loginAppAdmin();
+      }
+
+    }
+  }
+
 
   void loginUser() {
     Navigator.pushReplacementNamed(
@@ -150,7 +216,7 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: loginUser,
+              onPressed: loginUserHttp,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 60),
                 shape: RoundedRectangleBorder(
@@ -168,69 +234,6 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-
-            // const SizedBox(height: 24),
-            // ElevatedButton(
-            //   onPressed: loginUser,
-            //   style: ElevatedButton.styleFrom(
-            //     minimumSize: const Size(double.infinity, 60),
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //     ),
-            //     backgroundColor: Colors.blue,
-            //     foregroundColor: Colors.white,
-            //     textStyle: const TextStyle(fontSize: 20),
-            //   ),
-            //   child: const Text(
-            //     '一般ユーザーログイン',
-            //     style: TextStyle(
-            //       fontSize: 30,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            // ),
-            //
-            // const SizedBox(height: 24),
-            // ElevatedButton(
-            //   onPressed: loginAdmin,
-            //   style: ElevatedButton.styleFrom(
-            //     minimumSize: const Size(double.infinity, 60),
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //     ),
-            //     backgroundColor: Colors.blue,
-            //     foregroundColor: Colors.white,
-            //     textStyle: const TextStyle(fontSize: 20),
-            //   ),
-            //   child: const Text(
-            //     'グループ管理者ログイン',
-            //     style: TextStyle(
-            //       fontSize: 30,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            // ),
-            //
-            // const SizedBox(height: 24),
-            // ElevatedButton(
-            //   onPressed: loginAppAdmin,
-            //   style: ElevatedButton.styleFrom(
-            //     minimumSize: const Size(double.infinity, 60),
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //     ),
-            //     backgroundColor: Colors.blue,
-            //     foregroundColor: Colors.white,
-            //     textStyle: const TextStyle(fontSize: 20),
-            //   ),
-            //   child: const Text(
-            //     'APP管理者ログイン',
-            //     style: TextStyle(
-            //       fontSize: 30,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            // ),
 
             const SizedBox(height: 24),
             ElevatedButton(

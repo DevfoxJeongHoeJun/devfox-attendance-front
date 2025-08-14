@@ -1,5 +1,4 @@
 import 'package:attendance_client/screens/company_admin_home_screen.dart';
-import 'package:attendance_client/screens/company_app_admin_home_screen.dart';
 import 'package:attendance_client/screens/company_create_screen.dart';
 import 'package:attendance_client/screens/company_info_screen.dart';
 import 'package:attendance_client/screens/employee_attendance_list_screen.dart';
