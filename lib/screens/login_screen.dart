@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -34,6 +36,7 @@ class LoginScreenState extends State<LoginScreen> {
         "password": passwordController.text
       }),
     );
+
 
     if (response.statusCode == 200) {
       // 「https://juntcom.tistory.com/276」、←は私が参考したリンクです。
@@ -70,6 +73,8 @@ class LoginScreenState extends State<LoginScreen> {
       print("role : $role");
       print("groupCode : $groupCode");
 
+//https://doogle.link/flutter-dart-%EC%97%90%EC%84%9C-%EC%84%9C%EB%B2%84-%EC%9D%91%EB%8B%B5-%EC%BF%A0%ED%82%A4-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0/
+
       if(role == "ROLE_USER" || role == "ROLE_MANAGER"){
         loginUser();
       } else if (role == "ROLE_ADMIN") {
@@ -77,9 +82,10 @@ class LoginScreenState extends State<LoginScreen> {
       } else if (role == "ROLE_SUPER") {
         loginAppAdmin();
       }
-
     }
   }
+
+
 
 
   void loginUser() {
