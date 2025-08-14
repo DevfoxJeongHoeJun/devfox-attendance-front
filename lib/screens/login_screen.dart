@@ -36,9 +36,9 @@ class LoginScreenState extends State<LoginScreen> {
     );
 
     if (response.statusCode == 200) {
-      // 「https://velog.io/@ramyuning/%EB%B0%B1%EC%97%94%EB%93%9C%EC%99%80-http-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0」、
-      // 「https://qiita.com/k-keita/items/5b748e081cf96c5ea38f」←は私が参考したリンクです。
-      // FlutterでHTTPのRequestの方法です。
+      // 「https://juntcom.tistory.com/276」、←は私が参考したリンクです。
+      // 「https://llshl.tistory.com/64」←は私が参考したリンクです。（JSONの配列でーたに接近する方法です。）
+      // FlutterでresponseのjsonDataをparsingの方法です。
 
       final userData = json.decode(response.body);
       var message = userData['message'];
@@ -47,6 +47,9 @@ class LoginScreenState extends State<LoginScreen> {
       print("status: ${response.statusCode}");
       print("message: ${message}");
 
+
+      // 「https://jutole.tistory.com/63」、←は私が参考したリンクです。
+      // Flutterのsecure storageの使い方です。
       await storage.write(key: "userId", value: userData['body']['id'].toString());
       await storage.write(key: "username", value: userData['body']['name']);
       await storage.write(key: "role", value: userData['body']['accessLevelCode']);
