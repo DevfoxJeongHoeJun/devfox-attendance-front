@@ -168,6 +168,7 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                   width: 1,
                 ),
               ),
+              //未来ビルド
               child: FutureBuilder<String?>(
                 future: storage.read(key: "username"),
                 builder: (context, snapshot) {
