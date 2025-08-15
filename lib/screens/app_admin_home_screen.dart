@@ -17,19 +17,20 @@ class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
   Future<void> UserListHttp() async {
 
     final storage = new FlutterSecureStorage();
-    final userId = await storage.read(key: "userId");
-    final username = await storage.read(key: "username");
     final role = await storage.read(key: "role");
-    final groupCode = await storage.read(key: "groupCode");
 
-
+    // role에 따른 초기 화면 결정
+    String initialRoute = '/login';
+    if (role == "ROLE_USER" || role == "ROLE_MANAGER") {
+      initialRoute = '/attend/record';
+    } else if (role == "ROLE_ADMIN") {
+      initialRoute = '/admin/home';
+    } else if (role == "ROLE_SUPER") {
+      initialRoute = '/app-admin/home';
+    }
     if (role == "ROLE_SUPER") {
-      print("userId : $userId");
-      print("username : $username");
-      print("role : $role");
-      print("groupCode : $groupCode");
       goToUserList();
-    } if (role != "ROLE_SUPER") {
+    } if (role == null || role != "ROLE_SUPER") {
       goToLogin();
     }
   }
