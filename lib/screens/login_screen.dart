@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 
@@ -23,6 +26,8 @@ class LoginScreenState extends State<LoginScreen> {
 
   String? sessionCookie;
 
+
+
   Future<void> loginUserHttp() async {
     // 「https://velog.io/@ramyuning/%EB%B0%B1%EC%97%94%EB%93%9C%EC%99%80-http-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0」、
     // 「https://qiita.com/k-keita/items/5b748e081cf96c5ea38f」←は私が参考したリンクです。
@@ -37,7 +42,6 @@ class LoginScreenState extends State<LoginScreen> {
       }),
     );
 
-
     if (response.statusCode == 200) {
       // 「https://juntcom.tistory.com/276」、←は私が参考したリンクです。
       // 「https://llshl.tistory.com/64」←は私が参考したリンクです。（JSONの配列でーたに接近する方法です。）
@@ -49,7 +53,6 @@ class LoginScreenState extends State<LoginScreen> {
       print("レスポンス: ${response.body}");
       print("status: ${response.statusCode}");
       print("message: ${message}");
-
 
       // 「https://jutole.tistory.com/63」、←は私が参考したリンクです。
       // Flutterのsecure storageの使い方です。
