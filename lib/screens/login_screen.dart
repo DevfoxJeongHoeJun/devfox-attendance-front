@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,7 +26,7 @@ class LoginScreenState extends State<LoginScreen> {
 
 
 
-  Future<void> loginUserHttp() async {
+  Future<String?> loginUserHttp() async {
     // 「https://velog.io/@ramyuning/%EB%B0%B1%EC%97%94%EB%93%9C%EC%99%80-http-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0」、
     // 「https://qiita.com/k-keita/items/5b748e081cf96c5ea38f」←は私が参考したリンクです。
     // FlutterでHTTPのRequestの方法です。
@@ -39,7 +40,11 @@ class LoginScreenState extends State<LoginScreen> {
       }),
     );
 
-    if (response.statusCode == 200) {
+    final userData = json.decode(response.body);
+    if (userData['body'] == null) {
+      return null;
+    }
+    if (userData['body']['accessLevelCode'] != null) {
       // 「https://juntcom.tistory.com/276」、←は私が参考したリンクです。
       // 「https://llshl.tistory.com/64」←は私が参考したリンクです。（JSONの配列でーたに接近する方法です。）
       // FlutterでresponseのjsonDataをparsingの方法です。
@@ -84,9 +89,6 @@ class LoginScreenState extends State<LoginScreen> {
       }
     }
   }
-
-
-
 
   void loginUser() {
     Navigator.pushReplacementNamed(
@@ -225,7 +227,21 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: loginUserHttp,
+                onPressed: () async {
+                  final result = await loginUserHttp();
+                  if (result == null) {
+                    Flushbar(
+                      message: '                                              ToastMessage\n                                        確認に失敗しました。',
+                      duration: Duration(seconds: 2),
+                      flushbarPosition: FlushbarPosition.TOP,
+                      backgroundColor: Colors.red,
+                      margin: EdgeInsets.all(16),
+                      borderRadius: BorderRadius.circular(8),
+                      icon: Icon(Icons.warning, color: Colors.white),
+                    ).show(context);
+                    return;
+                  }
+                },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 60),
                 shape: RoundedRectangleBorder(
