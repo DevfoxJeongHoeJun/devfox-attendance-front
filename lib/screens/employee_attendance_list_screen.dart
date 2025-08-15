@@ -69,7 +69,9 @@ class _EmpAttandState extends State<EmployeeAttendanceListScreen> {
     final max = scrollController.position.maxScrollExtent;
 
     if (current >= max - 200) {
-      _handleSearch();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _handleSearch();
+      });
     }
   }
 
@@ -86,11 +88,14 @@ class _EmpAttandState extends State<EmployeeAttendanceListScreen> {
       isLoading = true;
     });
 
+    // れフレッシュすれば、ページとリストを初期化
     if (isRefresh) {
       page = 0;
+      employees.clear();
+      hasMore = true; // ページ ① からな（次のページないって意味）
     }
 
-
+    // ログイン状態チェック（LocalStorageに情報がなければログイン画面に遷移）
     final groupCode = await storage.read(key: "groupCode");
 
     if (groupCode == null || groupCode.isEmpty) {
@@ -98,71 +103,125 @@ class _EmpAttandState extends State<EmployeeAttendanceListScreen> {
       return;
     }
 
-    final url = Uri.parse("http://localhost:8080/api/group/attend-list?page=${page}&size=${size}");
-    final response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        "groupCode": groupCode,
-        "startDate": startDateController.text,
-        "endDate": endDateController.text,
-        "status": selectedStatus,
-        "userName": searchController.text
-      }),
+    // API 呼び出し
+    final url = Uri.parse(
+        "http://localhost:8080/api/group/attend-list?page=${page}&size=${size}"
     );
 
-    if (response.statusCode == 200) {
-      final decoded = json.decode(response.body) as Map<String, dynamic>;
-      final List<dynamic> bodyList = decoded['body']['content'] ?? [];
+    try {
 
+      // レスポンス
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          "groupCode": groupCode,
+          "startDate": startDateController.text,
+          "endDate": endDateController.text,
+          "status": selectedStatus,
+          "userName": searchController.text
+        }),
+      );
+
+      // レスポンスをパーシング
+      if (response.statusCode == 200) {
+        final decoded = json.decode(response.body) as Map<String, dynamic>;
+
+        // body.content = 実際のデータ、last = 最後のページチェック
+        final List<dynamic> contentList  = decoded['body']['content'] ?? [];
+        final bool lastPage = decoded['body']?['last'] ?? true;
+
+        // Map形式に変換し、データを重なる
+        final newItems = contentList
+            .map((e) => Map<String, dynamic>.from(e))
+            .toList();
+
+        setState(() {
+          employees.addAll(newItems); // 元の勤怠一覧リストに追加
+          hasMore = !lastPage;        // 最後のページではなければ true
+          if (!lastPage) page++;      // 最後のページではなければ page 増加
+          isLoading = false;
+        });
+      }
+    } catch(e) {
+      // 失敗時の処理
       setState(() {
-        employees = bodyList.map((e) => Map<String, dynamic>.from(e)).toList();
+        isLoading = false; // ローディング終了
       });
     }
   }
 
+  // Controller 解除して、Memory漏水防止
+  @override
+  void dispose() {
+    scrollController.dispose();
+    startDateController.dispose();
+    endDateController.dispose();
+    searchController.dispose();
+    super.dispose();
+  }
+
+  // APIから取得した情報を出力（スクロールでページング可能）
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const PageTitle(),
-              const SizedBox(height: 16),
-              const SearchText(),
-              const SizedBox(height: 8),
-              DateRangeInput(
-                startController: startDateController,
-                endController: endDateController
-              ),
-              const SizedBox(height: 8),
-              StatusSelector(
-                value: selectedStatus,
-                onChanged: (val) => {
-                  setState(() {
-                    selectedStatus = val;
-                  })
+        child: Column(
+          children: [
+            const PageTitle(),
+            const SizedBox(height: 16),
+            const SearchText(),
+            const SizedBox(height: 8),
+            DateRangeInput(
+              startController: startDateController,
+              endController: endDateController
+            ),
+            const SizedBox(height: 8),
+            StatusSelector(
+              value: selectedStatus,
+              onChanged: (val) => {
+                setState(() {
+                  selectedStatus = val;
+                })
+              },
+            ),
+            const SizedBox(height: 8),
+            NameSearchInput(
+              controller: searchController,
+              onSearch: () {
+                page = 0;       // 検索時、ページ初期化
+                employees.clear();
+                hasMore = true;
+                _handleSearch(isRefresh: true);
+              },
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: employees.length + (hasMore ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (index < employees.length) {
+                    final emp = employees[index];
+                    return EmployeeListItem(emp: emp);
+                  } else {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
                 },
               ),
-              const SizedBox(height: 8),
-              NameSearchInput(
-                controller: searchController,
-                onSearch: () {
-                  _handleSearch();
-                },
-              ),
-              const SizedBox(height: 16),
-              EmployeeList(employees: employees),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
   }
 }
 
+// 画面名
 class PageTitle extends StatelessWidget {
   const PageTitle({super.key});
 
@@ -177,6 +236,7 @@ class PageTitle extends StatelessWidget {
   }
 }
 
+// キャレンダーラベル
 class SearchText extends StatelessWidget {
   const SearchText({super.key});
 
@@ -189,6 +249,7 @@ class SearchText extends StatelessWidget {
   }
 }
 
+// 検索日付Widget
 class DateRangeInput extends StatefulWidget {
   final TextEditingController startController;
   final TextEditingController endController;
@@ -203,7 +264,7 @@ class DateRangeInput extends StatefulWidget {
   State<DateRangeInput> createState() => _DateRangeInputState();
 }
 
-//検索日付Widget
+// 検索日付Widget
 class _DateRangeInputState extends State<DateRangeInput> {
 
   Future<void> _selectDate(bool isStart) async {
@@ -269,6 +330,7 @@ class _DateRangeInputState extends State<DateRangeInput> {
   }
 }
 
+// ステータスセレクトボックス
 class StatusSelector extends StatelessWidget {
   final String value;
   final ValueChanged<String> onChanged;
@@ -307,7 +369,7 @@ class StatusSelector extends StatelessWidget {
   }
 }
 
-
+// 検索テキストボックス
 class NameSearchInput extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback onSearch;
@@ -364,100 +426,85 @@ class NameSearchInput extends StatelessWidget {
   }
 }
 
-class EmployeeList extends StatefulWidget {
-  final List<Map<String, dynamic>> employees;
-  const EmployeeList({super.key, required this.employees});
+// 勤怠一覧リストWidget
+class EmployeeListItem extends StatelessWidget {
+  final Map<String, dynamic> emp;
 
-  @override
-  State<EmployeeList> createState() => _EmployeeListState();
-}
+  const EmployeeListItem({Key? key, required this.emp}) : super(key: key);
 
-class _EmployeeListState extends State<EmployeeList> {
   @override
   Widget build(BuildContext context) {
-    final employees = widget.employees;
+    String formatTime(String? time) {
+      if (time == null) return '欠勤';
+      try {
+        final dt = DateTime.parse(time);
+        return DateFormat('HH:mm').format(dt);
+      } catch (e) {
+        return time;
+      }
+    }
 
-    return Column(
-      children: employees.map((employee) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed('/attend/details');
-          },
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black26),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Column(
+    final startTimeText = formatTime(emp['startTime'] as String?);
+    final endTimeText = formatTime(emp['endTime'] as String?);
+
+    String typeText(String? type) {
+      switch (type) {
+        case '1':
+          return '出社';
+        case '2':
+          return '在宅';
+        default:
+          return '-';
+      }
+    }
+    final type = typeText(emp['type']?.toString());
+
+    return GestureDetector(
+        onTap: () {
+          // TODO カードを押下して、該当勤怠詳細画面に遷移
+          // TODO 次にLocalStorageからユーザーIDを取得して、渡すべきです
+          Navigator.of(context).pushNamed('/attend/details');
+        },
+        child: Card(
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Text(
-                        employee['userName'] ?? '',
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        emp['userName'] ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.left,
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        '出勤',
-                        textAlign: TextAlign.right,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        employee['startTime'] != null && employee['startTime']!.isNotEmpty
-                            ? DateFormat('MM/dd HH:mm').format(DateTime.parse(employee['startTime']))
-                            : '-- : --',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
+                      const SizedBox(height: 4),
+                      Text('日付： ' + emp['date']),
+                      Text('出勤時間： $startTimeText'),
+                      Text('退勤時間： $endTimeText'),
+                      Text('勤怠形態： $type'),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Text(
-                        (employee['type'] == '1')
-                            ? '出社'
-                            : (employee['type'] == '2')
-                            ? '在宅'
-                            : '欠勤',
-                        textAlign: TextAlign.left,
+                Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      (emp['type'] == null) ? '✕' : '〇',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: (emp['type'] == null) ? Colors.red : Colors.green,
                       ),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        '退勤',
-                        textAlign: TextAlign.right,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        employee['endTime'] != null && employee['endTime']!.isNotEmpty
-                            ? DateFormat('MM/dd HH:mm').format(DateTime.parse(employee['endTime']))
-                            : '-- : --',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
           ),
-        );
-      }).toList(),
+        )
     );
   }
 }
-
