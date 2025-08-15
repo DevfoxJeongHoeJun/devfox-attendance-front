@@ -80,13 +80,9 @@ class LoginScreenState extends State<LoginScreen> {
 
 //https://doogle.link/flutter-dart-%EC%97%90%EC%84%9C-%EC%84%9C%EB%B2%84-%EC%9D%91%EB%8B%B5-%EC%BF%A0%ED%82%A4-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0/
 
-      if(role == "ROLE_USER" || role == "ROLE_MANAGER"){
-        loginUser();
-      } else if (role == "ROLE_ADMIN") {
-        loginAdmin();
-      } else if (role == "ROLE_SUPER") {
-        loginAppAdmin();
-      }
+      return role;
+
+
     }
   }
 
@@ -240,6 +236,14 @@ class LoginScreenState extends State<LoginScreen> {
                       icon: Icon(Icons.warning, color: Colors.white),
                     ).show(context);
                     return;
+                  } else {
+                    if(result == "ROLE_USER" || result == "ROLE_MANAGER"){
+                      loginUser();
+                    } else if (result == "ROLE_ADMIN") {
+                      loginAdmin();
+                    } else if (result == "ROLE_SUPER") {
+                      loginAppAdmin();
+                    }
                   }
                 },
               style: ElevatedButton.styleFrom(
