@@ -17,6 +17,8 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
   bool isWorking = false;
   final storage = const FlutterSecureStorage();
   String? lastWorkDate; //今日日付
+  String? startTime;//出勤時間
+  String? endTime; //退勤時間
 
   void _userMoreInfo(BuildContext context) {
     Navigator.pushReplacementNamed(
@@ -26,16 +28,33 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
   }
 
   Future<void> sendAttendance(String workType, bool isStart) async {
+    final userId = await storage.read(key: "userId");
     final username = await storage.read(key: "username");
-    final today = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-    final url = Uri.parse('http://localhost:8080/attendance'); // Kotlin 서버 주소
+    final now = DateTime.now(); // 변경: LocalDateTime 전용 변수
+    final todayDate = DateFormat('yyyy-MM-dd').format(now); // 변경: 날짜만
+    final nowTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now); // 변경: 시간 포함
 
-    final body = jsonEncode({
-      "username": username,
-      "workType": workType,
-      "isStart": isStart, // true: 출근, false: 퇴근
-      "timestamp": today,
+    final url = Uri.parse('http://localhost:8080/attendance');
+
+    final body = jsonEncode({ //もっとデータ必要
+      "id": null,
+      "userId": int.tryParse(userId ??"0"),
+      "date": todayDate,
+      "type": workType,
+      "startTime": isStart ? nowTime : null,
+      "startLocation": isStart ? "雑色" : null,
+      "endTime": !isStart ? nowTime : null,
+      "endLocation": !isStart ? "雑色" : null,
+      "createdAt": nowTime,
+      "createdUser": username ?? "system",
+      "updatedAt": nowTime,
+      "updatedUser": username ?? "system"
     });
+
+    if (userId == null) {
+      print("ユーザーIDが存在しません");
+      return;
+    }
 
     try {
       final response = await httpdart.post(
@@ -45,12 +64,12 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
       );
 
       if (response.statusCode == 200) {
-        print("출퇴근 정보 전송 성공");
+        print("出勤情報伝送成功");
       } else {
-        print("출퇴근 정보 전송 실패: ${response.statusCode}");
+        print("出勤情報伝送失敗: ${response.statusCode}");
       }
     } catch (e) {
-      print("출퇴근 정보 전송 에러: $e");
+      print("出勤情報伝エラー: $e");
     }
   }
 
@@ -105,7 +124,7 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
 
                           Center(
                               child: Text(
-                                '-',
+                                startTime ?? '--:--',
                                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               )
                           ),
@@ -128,8 +147,8 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                           ),
 
                           Center(
-                              child: const Text(
-                                '--:--',
+                              child: Text(
+                                endTime ?? '--:--',
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               )
                           ),
@@ -204,7 +223,7 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                             if (selectedWorkType == null) {
                               Flushbar(
                                 message: '出勤処理に失敗しました。',
-                                duration: Duration(seconds: 1),
+                                duration: Duration(seconds: 2),
                                 flushbarPosition: FlushbarPosition.TOP,
                                 backgroundColor: Colors.red,
                                 margin: EdgeInsets.all(16),
@@ -220,7 +239,8 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                                 // 今日出勤した場合、退勤だけ可能
                                 if (isWorking) {
                                   setState(() {
-                                    isWorking = false;
+                                    // isWorking = false;
+                                    endTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
                                   });
                                   await storage.write(key: "isWorking", value: "false");
                                   print("退勤: $selectedWorkType");
@@ -233,14 +253,15 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                               } else {
                                 // 今日最初出勤
                                 setState(() {
+                                  startTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
                                   isWorking = true;
                                 });
                                 await storage.write(key: "lastWorkDate", value: today);
                                 await storage.write(key: "isWorking", value: "true");
-                                print("出勤: $selectedWorkType");
-
                                 // 出勤 POST 呼び出す
                                 await sendAttendance(selectedWorkType!, true);
+
+                                print("出勤: $selectedWorkType");
                               }
                             }
                           }, style: ElevatedButton.styleFrom(
