@@ -168,7 +168,7 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                   width: 1,
                 ),
               ),
-              //ソンヒョン来ました
+              //ソンヒョン
               child: FutureBuilder<String?>(
                 future: storage.read(key: "username"),
                 builder: (context, snapshot) {
