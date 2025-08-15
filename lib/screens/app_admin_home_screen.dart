@@ -14,18 +14,6 @@ class AppAdminHomeScreen extends StatefulWidget {
 
 class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
 
-
-  Future<void> secureStorage() async {
-    final storage = new FlutterSecureStorage();
-    final userId = await storage.read(key: "userId");
-    final username = await storage.read(key: "username");
-    final role = await storage.read(key: "role");
-    final groupCode = await storage.read(key: "groupCode");
-
-
-  }
-
-
   Future<void> UserListHttp() async {
     final url = Uri.parse("http://localhost:8080/api/user/session");
 
@@ -40,8 +28,7 @@ class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
       headers: {'Content-Type': 'application/json'},
     );
 
-
-    if (response.statusCode == 200) {
+    if (role == "ROLE_SUPER") {
       final userData = json.decode(response.body);
       var message = userData['message'];
 
@@ -53,41 +40,29 @@ class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
       print("username : $username");
       print("role : $role");
       print("groupCode : $groupCode");
+      print(response.body);
       goToUserList();
-    } else {
+    } if (role != "ROLE_SUPER") {
       goToLogin();
     }
-
   }
-
 
   Future<void> groupListHttp() async {
     final url = Uri.parse("http://localhost:8080/api/user/session");
-
-    final storage = new FlutterSecureStorage();
-    final userId = await storage.read(key: "userId");
-    final username = await storage.read(key: "username");
-    final role = await storage.read(key: "role");
-    final groupCode = await storage.read(key: "groupCode");
 
     final response = await http.get(
       url,
       headers: {'Content-Type': 'application/json'},
     );
 
-
     if (response.statusCode == 200) {
-      final userData = json.decode(response.body);
-      var message = userData['message'];
 
-      print("レスポンス: ${response.body}");
-      print("status: ${response.statusCode}");
-      print("message: ${message}");
+      final storage = new FlutterSecureStorage();
+      final userId = await storage.read(key: "userId");
+      final username = await storage.read(key: "username");
+      final role = await storage.read(key: "role");
+      final groupCode = await storage.read(key: "groupCode");
 
-      print("userId : $userId");
-      print("username : $username");
-      print("role : $role");
-      print("groupCode : $groupCode");
       goToGroupList();
     } else {
       goToLogin();
