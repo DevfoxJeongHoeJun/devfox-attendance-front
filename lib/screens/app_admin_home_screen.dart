@@ -15,7 +15,6 @@ class AppAdminHomeScreen extends StatefulWidget {
 class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
 
   Future<void> UserListHttp() async {
-    final url = Uri.parse("http://localhost:8080/api/user/session");
 
     final storage = new FlutterSecureStorage();
     final userId = await storage.read(key: "userId");
@@ -23,24 +22,12 @@ class AppAdminHomeScreenState extends State<AppAdminHomeScreen> {
     final role = await storage.read(key: "role");
     final groupCode = await storage.read(key: "groupCode");
 
-    final response = await http.get(
-      url,
-      headers: {'Content-Type': 'application/json'},
-    );
 
     if (role == "ROLE_SUPER") {
-      final userData = json.decode(response.body);
-      var message = userData['message'];
-
-      print("レスポンス: ${response.body}");
-      print("status: ${response.statusCode}");
-      print("message: ${message}");
-
       print("userId : $userId");
       print("username : $username");
       print("role : $role");
       print("groupCode : $groupCode");
-      print(response.body);
       goToUserList();
     } if (role != "ROLE_SUPER") {
       goToLogin();
