@@ -15,6 +15,7 @@ class AttendanceRecordScreen extends StatefulWidget {
 class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
   String? selectedWorkType; // Dropdown 選沢値を保存
   bool isWorking = false;
+  bool hasEnded = false;
   final storage = const FlutterSecureStorage();
   String? lastWorkDate; //今日日付
   String? startTime;//出勤時間
@@ -27,6 +28,18 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
     );
   }
 
+  Future<httpdart.Response> postAttend(Map<String, dynamic> body) async {
+    final url = Uri.parse('http://localhost:8080/api/user/addAttend');
+    return await httpdart.post(url,
+        headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
+  }
+
+  Future<httpdart.Response> putAttend(int attendId, Map<String, dynamic> body) async {
+    final url = Uri.parse('http://localhost:8080/api/user/update/$attendId');
+    return await httpdart.put(url,
+        headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
+  }
+
   Future<void> sendAttendance(String workType, bool isStart) async {
     final userId = await storage.read(key: "userId");
     final username = await storage.read(key: "username");
@@ -34,7 +47,7 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
     final todayDate = DateFormat('yyyy-MM-dd').format(now); // 변경: 날짜만
     final nowTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now); // 변경: 시간 포함
 
-    final url = Uri.parse('http://localhost:8080/attendance');
+    final url = Uri.parse('http://localhost:8080/api/user/searchAttend/${userId}');
 
     final body = jsonEncode({ //もっとデータ必要
       "id": null,
@@ -57,13 +70,14 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
     }
 
     try {
-      final response = await httpdart.post(
+      final response = await httpdart.get(
         url,
         headers: {"Content-Type": "application/json"},
-        body: body,
       );
 
       if (response.statusCode == 200) {
+        final respBody = jsonDecode(response.body);
+        await storage.write(key: "lastAttendId", value: respBody["id"].toString());
         print("出勤情報伝送成功");
       } else {
         print("出勤情報伝送失敗: ${response.statusCode}");
@@ -72,6 +86,8 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
       print("出勤情報伝エラー: $e");
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +237,7 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                         // 出勤退勤ボタン機能
                         ElevatedButton(
                           onPressed: () async {
-                            if (selectedWorkType == null) {
+                            if (selectedWorkType == null) { //業務形態そのまま
                               Flushbar(
                                 message: '出勤処理に失敗しました。',
                                 duration: Duration(seconds: 2),
@@ -233,36 +249,60 @@ class _AttendanceRecordScreenState extends State<AttendanceRecordScreen> {
                               ).show(context);
                               return;
                             } else {
+                              final userId = await storage.read(key: "userId");
+                              final username = await storage.read(key: "username");
                               final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
                               final lastWorkDate = await storage.read(key: "lastWorkDate");
-
-                              if (lastWorkDate == today) {
-                                // 今日出勤した場合、退勤だけ可能
-                                if (isWorking) {
-                                  setState(() {
-                                    // isWorking = false;
-                                    endTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
-                                  });
-                                  await storage.write(key: "isWorking", value: "false");
-                                  print("退勤: $selectedWorkType");
-
-                                  // 退勤 POST 呼び出す
-                                  await sendAttendance(selectedWorkType!, false);
-                                } else {
-                                  print("今日はもう出勤できません");
-                                }
-                              } else {
+                              print(today);
+                              if (lastWorkDate != today) {
                                 // 今日最初出勤
-                                setState(() {
-                                  startTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
-                                  isWorking = true;
-                                });
-                                await storage.write(key: "lastWorkDate", value: today);
-                                await storage.write(key: "isWorking", value: "true");
-                                // 出勤 POST 呼び出す
-                                await sendAttendance(selectedWorkType!, true);
+                                final body = {
+                                  "userId": int.tryParse(userId ?? "0"),
+                                  "date": today,
+                                  "type": selectedWorkType,
+                                  "startTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+                                  "startLocation": "雑色",
+                                  "createdUser": username ?? "system",
+                                };
+                                final response = await postAttend(body); //出勤 POST 呼び出す
+                                if (response.statusCode == 200) {
+                                  final respBody = jsonDecode(response.body);
+                                  await storage.write(key: "lastAttendId", value: respBody["id"].toString());
+                                  await storage.write(key: "lastWorkDate", value: today);
 
-                                print("出勤: $selectedWorkType");
+                                  setState(() {
+                                    startTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+                                    isWorking = true;
+                                    endTime = null;
+                                  });
+                                  print("出勤成功: $selectedWorkType");
+                                } else {
+                                  print("出勤失敗: ${response.statusCode}");
+                                }
+                              }
+                              else{ // 今日出勤した場合、退勤だけ可能
+                                final attendId = await storage.read(key: "lastAttendId");
+                                if (attendId == null) {
+                                  print("退勤IDが存在しません");
+                                  return;
+                                }
+
+                                final body = {
+                                  "endTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+                                  "endLocation": "雑色",
+                                  "updatedUser": username ?? "system",
+                                };
+
+                                final response = await putAttend(int.parse(attendId), body);
+                                if (response.statusCode == 200) {
+                                  setState(() {
+                                    endTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+                                    isWorking = false;
+                                  });
+                                  print("退勤成功: $selectedWorkType");
+                                } else {
+                                  print("退勤失敗: ${response.statusCode}");
+                                }
                               }
                             }
                           }, style: ElevatedButton.styleFrom(
