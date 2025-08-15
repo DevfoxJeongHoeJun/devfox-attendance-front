@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: '勤怠管理アプリddd',
+      title: '勤怠管理アプリ',
       initialRoute: initialRoute,
       routes: {
         '/login': (context) => const LoginScreen(),
